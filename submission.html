@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- made this entire thing in one page so LOs can run on their local machine without copying a directory  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Submission Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        body {
+            background: #00a9e0;
+        }
+
+        header {
+            display: flex;
+            padding: 10px 0 10px 0;
+            justify-content: center;
+            background: #002855;
+            color: #fff;
+        }
+
+        header img {
+            background: white;
+            margin-right: 2%;
+        }
+
+        header h1 {
+            font-size: 5em;
+        }
+
+        #content-container {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            justify-content:space-around;
+        }
+
+        #question-section {
+            width: 48%;
+        }
+
+        #list-display {
+            width: 48%;
+        }
+
+        .box {
+            display: inline;
+            margin:0;
+            padding:0;
+        }
+
+        #error-prompt-card {
+            border: 2px solid #f00;
+        }
+
+        .fail-validation {
+            background: #ffc7ce;
+            color: #9c0006;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="https://www.newrez.com/media/1560311/newrez_color.png">
+        <h1>Loan Submission Form</h1>
+    </header>
+    <div id="content-container">
+    <div class="form-group mt-4" id="question-section">
+        <div class="card col-lg-8" id="loan-number-card">
+            <div class="card-body">
+                <h4 class="card-title">Enter Loan Number:</h4>
+                <input type="text" id="loan-number" maxlength="11">
+            </div>
+        </div>
+        <div class="card col-lg-8 mt-2">
+            <div class="card-body">
+                <h4 class="card-title">Type of Transaction</h4>
+                <div class="form-check container">
+                    <input class="form-check-input" type="radio" name="transaction-radio" id="exampleRadios1"
+                        value="purch">
+                    <label class="form-check-label" for="exampleRadios1">
+                        Purchase
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="transaction-radio" id="exampleRadios2"
+                        value="refi" checked>
+                    <label class="form-check-label" for="exampleRadios2">
+                        Refinance
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-2 col-lg-8" id="loan-program-card">
+            <div class="card-body">
+                <label for="loan-program mt-2">
+                    <h4>Loan Program</h4>
+                </label>
+                <select class="form-control col-sm-12" id="loan-program">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="conventional">Conventional</option>
+                    <option value="fha">FHA</option>
+                    <option value="va">VA</option>
+                    <option value="smart">SMART</option>
+                </select>
+                <div class="form-check form-check-inline mt-1">
+                    <input class="form-check-input" type="radio" name="loan-purpose-radio" id="loanPurposeRadio1"
+                        value="cashout" checked>
+                    <label class="form-check-label" for="loanPurposeRadio1">Cash Out</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="loan-purpose-radio" id="loanPurposeRadio2"
+                        value="r/t">
+                    <label class="form-check-label" for="loanPurposeRadio2">Rate/Term</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="loan-purpose-radio" id="loanPurposeRadio3"
+                        value="streamline">
+                    <label class="form-check-label" for="loanPurposeRadio3">Streamline</label>
+                </div>
+                <div class="form-check form-check-inline mt-1">
+                    <input class="form-check-input" type="radio" name="loan-purpose-radio" id="loanPurposeRadio4"
+                        value="purchase">
+                    <label class="form-check-label" for="loanPurposeRadio4">Purchase</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-2 col-lg-8" id="property-card">
+            <div class="card-body">
+                <h4 class="card-title">Select Property Type</h4>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="prop-type-radio" id="propTypeRadio1" value="sfr">
+                    <label class="form-check-label" for="propTypeRadio1">SFR</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="prop-type-radio" id="propTypeRadio2" value="pud">
+                    <label class="form-check-label" for="propTypeRadio2">PUD</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="prop-type-radio" id="propTypeRadio3"
+                        value="condo">
+                    <label class="form-check-label" for="propTypeRadio3">Condo</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="prop-type-radio" id="propTypeRadio4"
+                        value="manufactured">
+                    <label class="form-check-label" for="propTypeRadio4">Manufactured</label>
+                </div>
+                <h4 class="mt-1">Select Occupancy</h4>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="occupancy-radio" id="occupancyRadio1"
+                        value="owner">
+                    <label class="form-check-label" for="occupancyRadio1">Owner Occupied</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="occupancy-radio" id="occupancyRadio2"
+                        value="second">
+                    <label class="form-check-label" for="occupancyRadio2">Second Home</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="occupancy-radio" id="occupancyRadio3"
+                        value="investment">
+                    <label class="form-check-label" for="occupancyRadio3">Investment</label>
+                </div>
+                <div class="mt-1" id="primary-res-question"></div>
+            </div>
+        </div>
+        <div class="card mt-2 col-lg-8" id="num-mortgages-card">
+            <div class="card-body">
+                <h4>How many mortgages are on the subject property?</h4>
+                <input type="number" id="num-mortgages" min="0" value="1" onchange="secondIntention()" />
+                <div class="mt-1" id="extra-num-mortgages"></div>
+                <div class="mt-1" id="isReporting"></div>
+            </div>
+        </div>
+        <div class="card col-lg-10 mt-2" id="num-REO-card">
+            <div class="card-body" id="reo-question">
+                <h4>How many <em>other</em> properties does the borrower own?</h4>
+                <p>(Not including subject)</p>
+                <input type="number" id="num-REO" value="0" min="0" step="1" onchange="showREO()">
+            </div>
+            <div class="mt-1" id="other-reo">
+
+            </div>
+        </div>
+        <div class="card mt-2 col-md-5 d-inline-block income-cards">
+            <div class="card-body">
+                <h4 class="card-title">B1 Type of Income</h4>
+                <h6 class="card-subtitle mb-2 text-muted">(Check all that apply)</h6>
+                <p>(don't select any if NCQ streamline)</p>
+                <div class="form-check">
+                    <input class="form-check-input income b1-income" type="checkbox" value="w2" id="b1-w2">
+                    <label class="form-check-label" for="b1-w2">
+                        W2
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input income b1-income" type="checkbox" value="commission"
+                        id="b1-commission-bonus">
+                    <label class="form-check-label" for="b1-commission-bonus">
+                        Commission/Bonus
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input income b1-income" type="checkbox" value="retirement"
+                        id="b1-retirement">
+                    <label class="form-check-label" for="b1-retirement">
+                        Retirement/Pension
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input income b1-income" type="checkbox" value="schC" id="b1-schC">
+                    <label class="form-check-label" for="b1-schC">
+                        Self-Employed (Sch C)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input income b1-income" type="checkbox" value="k1" id="b1-k1">
+                    <label class="form-check-label" for="b1-k1">
+                        Self-Employed (1120/K1)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-2 col-md-5 d-inline-block income-cards">
+            <div class="card-body">
+                <h4 class="card-title">B2 Type of Income</h4>
+                <h6 class="card-subtitle mb-2 text-muted">(Check all that apply)</h6>
+                <p>(don't select any if NCQ streamline)</p>
+                <div class="form-check">
+                    <input class="form-check-input income b2-income" type="checkbox" value="w2" id="b2-w2">
+                    <label class="form-check-label" for="b2-w2">
+                        W2
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input income b2-income" type="checkbox" value="commission"
+                        id="b2-commission-bonus">
+                    <label class="form-check-label" for="b2-commission-bonus">
+                        Commission/Bonus
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input income b2-income" type="checkbox" value="retirement"
+                        id="b2-retirement">
+                    <label class="form-check-label" for="b2-retirement">
+                        Retirement/Pension
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input income b2-income" type="checkbox" value="schC" id="b2-schC">
+                    <label class="form-check-label" for="b2-schC">
+                        Self-Employed (Sch C)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input income b2-income" type="checkbox" value="k1" id="b2-k1">
+                    <label class="form-check-label" for="b2-k1">
+                        Self-Employed (1120/K1)
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card col-lg-10 mt-2">
+            <p>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" href="#collapseExample" data-toggle="collapse"
+                        id="bkSwitch">
+                    <label class="custom-control-label" for="bkSwitch">
+                        <h4>Any BK on credit?</h4>
+                    </label>
+                </div>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bkRadioOptions" id="bkRadio1" value="ch13">
+                        <label class="form-check-label" for="bkRadio1">Chapter 13</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bkRadioOptions" id="bkRadio2" value="ch7">
+                        <label class="form-check-label" for="bkRadio2">Chapter 7</label>
+                    </div>
+                    <label for="bk-date">Date of Discharge:</label>
+                    <input type="date" id="bk-date">
+                </div>
+            </div>
+        </div>
+        <div class="card col-lg-10 mt-2">
+            <div class="card-body">
+                <h4 class="card-title">Any other derogs on credit</h4>
+                <h6 class="card-subtitle mb-2 text-muted">(Check all that apply)</h6>
+                <div class="form-check">
+                    <input class="form-check-input derog" type="checkbox" value="foreclosure" id="derogCheckbox1">
+                    <label class="form-check-label" for="derogCheckbox1">
+                        Foreclosure
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input derog" type="checkbox" value="shortSale" id="derogCheckbox2">
+                    <label class="form-check-label" for="derogCheckbox2">
+                        Short Sale
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input derog" type="checkbox" value="dil" id="derogCheckbox3">
+                    <label class="form-check-label" for="derogCheckbox3">
+                        Deed in Lieu
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input derog" type="checkbox" value="disputes" id="derogCheckbox4">
+                    <label class="form-check-label" for="derogCheckbox4">
+                        Disputed derogs > $1,000
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input derog" type="checkbox" value="collections" id="derogCheckbox5">
+                    <label class="form-check-label" for="derogCheckbox5">
+                        Collections totaling > $2,000
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="card col-lg-10 mt-2">
+            <p>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" href="#collapseExample2" data-toggle="collapse"
+                        id="studentLoanSwitch2">
+                    <label class="custom-control-label" for="studentLoanSwitch2">
+                        <h4>Any Student Loans on credit?</h4>
+                    </label>
+                </div>
+            </p>
+            <div class="collapse" id="collapseExample2">
+                <div class="card card-body">
+                    <p>Are they deferred for > 12 months?</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="studentLoanRadioOptions" id="studentRadio1"
+                            value="n" checked>
+                        <label class="form-check-label" for="studentRadio1">No</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="studentLoanRadioOptions" id="studentRadio2"
+                            value="y">
+                        <label class="form-check-label" for="studentRadio2">Yes</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-2 col-lg-8" id="aus-card">
+            <div class="card-body">
+                <h4 class="card-title">AUS Findings</h4>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ausRadioOptions" id="ausRadio1" value="approve">
+                    <label class="form-check-label" for="ausRadio1">Approve/Accept</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ausRadioOptions" id="ausRadio2" value="refer">
+                    <label class="form-check-label" for="ausRadio2">Refer</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ausRadioOptions" id="ausRadio3" value="na">
+                    <label class="form-check-label" for="ausRadio3">N/A</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-2 col-lg-10 d-none fail-validation text-center pt-2" id="error-prompt-card">
+            <!-- <div class="card-body"> -->
+            <p><strong>correct errors above to generate checklist</strong></p>
+            <!-- </div> -->
+        </div>
+
+
+        <button type="button" class="btn btn-danger btn-lg btn-block mt-2" id="submit">Click Here to Generate
+            Submission Checklist</button>
+    </div>
+    <div class="mt-4" id="list-display">
+
+    </div>
+</div>
+    <!-- jQuery and Bootstrap stuff -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    
+    <!-- jsPDF CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+
+    <script>
+
+        // =============================================================================================
+        // == Process FLow =============================================================================
+        // =============================================================================================
+            /*
+
+                If the user's form validates, the generate list function begins the process of compiling list for needed items
+
+                Steps: 
+
+                    - a submission object is built based upon the user's input
+                    - that object is then scanned and, based upon it's contents, various arrays are built which house strings of items needed
+                        - currently using if statements, switch statements may keep it more organized 
+                    - those arrays are all combined into one large array, and then each of those elements is displayed to the page
+                    - various buttons are appended to the bottom of the final list which currently allow for:
+                            - exporting the submission list to pdf (kind of ugly - need to move buttons to a different div, so they're not in the pdf)
+                            - opening emails for service requests:
+                                - ordering a FHA case #
+                                - ordering a COE for VA loan
+                                - ordering a LIN for VA IRRRL (streamline)
+                    
+            */
+        //==============================================================================================
+
+        
+        // email to send service requests to
+        let opsEmail = 'dwilliams@newrez.com';
+        // initialize the submission object
+        let submission = {}
+        // initialize the new window for service req emails
+        let newWindow;
+        
+
+        // =============================================================================================
+        // == DISPLAY/FORM CONTROLS ====================================================================
+        // =============================================================================================
+
+        // controls extra divs that ask if any additional mortgages will be subordinated or paid off, and if all mortgages are reporting to credit
+        function secondIntention() {
+            $('#extra-num-mortgages').empty();
+            $('#isReporting').empty();
+            if(parseInt($('#num-mortgages').val()) > 0){
+                let report = $('<h4 class="mt-1">Are all mortgages reporting on credit?</h4><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="reporting-radio" id="reportingRadio1" value="reporting" checked><label class="form-check-label" for="reportingRadio1">Yes</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="reporting-radio" id="reportingRadio2" value="notReporting"><label class="form-check-label" for="reportingRadio2">No</label></div>');
+
+                $('#isReporting').append(report);
+            }
+            if (parseInt($('#num-mortgages').val()) > 1) {
+                let intention = $('<h4 class="mt-1">What is your intention with additional mortgage(s)?</h4><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="subordination-radio" id="subordinationRadio1" value="payoff" checked><label class="form-check-label" for="subordinationRadio1">Pay Off</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="subordination-radio" id="subordinationRadio2" value="subordinate"><label class="form-check-label" for="subordinationRadio2">Subordinate</label></div>');
+
+                $('#extra-num-mortgages').append(intention);
+            }
+        }
+
+        // added to 'document ready' because first function isn't triggered if user doesn't change value of the input field (it defaults to '1')
+        $(document).ready(function() {
+            let report = $('<h4 class="mt-1">Are all mortgages reporting on credit?</h4><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="reporting-radio" id="reportingRadio1" value="reporting" checked><label class="form-check-label" for="reportingRadio1">Yes</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="reporting-radio" id="reportingRadio2" value="notReporting"><label class="form-check-label" for="reportingRadio2">No</label></div>');
+
+            $('#isReporting').append(report);
+        });
+
+        // prompts if each REO is an investment or retained property
+        function showREO() {
+            $('#other-reo').empty();
+            let numREO = parseInt($('#num-REO').val().trim());
+            if (numREO) { $('#other-reo').append("<p>Investment = using income from this property<br>Retained = NOT using income from this property</p>") }
+            for (let i = 0; i < numREO; i++) {
+                let reoQuest = $('<div class="card col-md-12"><div class="card-body"><h6>Property # ' + (i + 1) + '</h6><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="reoRadioOptions' + i + '" id="reoRadio' + i + '" value="inv"><label class="form-check-label" for="reoRadio' + i + '">Investment</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="reoRadioOptions' + i + '" id="reoRadio' + (i + 100) + '" value="ret" checked><label class="form-check-label" for="reoRadio' + (i + 100) + '">Retained</label></div></div></div>');
+
+                $('#other-reo').append(reoQuest);
+            }
+        }
+
+        // if user indicates this is not borrower primary, display prompt asking about the primary - rent vs own
+        $('input:radio[name="occupancy-radio"]').on('click', function() {
+            $('#primary-res-question').empty();
+            if(this.value !== 'owner') {
+                let primaryQuestion = $('<h4 class="mt-1">Does customer <em>own</em> or <em>rent</em> their primary residence?</h4><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="NOO-primary" id="NOO-primaryRadio1" value="own" checked><label class="form-check-label" for="NOO-primaryRadio1">Own</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="NOO-primary" id="NOO-primaryRadio2" value="rent"><label class="form-check-label" for="NOO-primaryRadio2">Rent</label></div>');
+
+                $('#primary-res-question').append(primaryQuestion);
+            }
+        })
+
+        // submit button checks if form is completed, then populates submission object
+            // clears any prior form if user updates fields and gets failed validation
+    
+        $('#submit').on('click', function () {
+            if (checkForm()) {
+                $('html, body').animate({scrollTop: 0}, 'slow');
+                generateList();
+            } else {
+                $('#list-display').empty();
+            }
+        })
+
+        // =============================================================================================
+        // == VALIDATION ===============================================================================
+        // =============================================================================================
+
+        // conrols incomplete form - highlights red if not complete
+        function checkForm() {
+            let status = true;
+            if ($('#loan-number').val().trim().length < 11) {
+                $('#loan-number-card').addClass('fail-validation');
+                status = false;
+            } else {
+                $('#loan-number-card').removeClass('fail-validation');
+            }
+
+            if (!$('#loan-program').val()) {
+                $('#loan-program-card').addClass('fail-validation');
+                status = false;
+            } else {
+                $('#loan-program-card').removeClass('fail-validation');
+            }
+
+            if (!$('input[name="prop-type-radio"]:checked').val() || !$('input[name="occupancy-radio"]:checked').val()) {
+                $('#property-card').addClass('fail-validation');
+                status = false;
+            } else {
+                $('#property-card').removeClass('fail-validation');
+            }
+
+            if (!$('#num-mortgages').val().trim()) {
+                $('#num-mortgages-card').addClass('fail-validation');
+                status = false;
+            } else {
+                $('#num-mortgages-card').removeClass('fail-validation');
+            }
+
+            if (!$('#num-REO').val().trim()) {
+                $('#num-REO-card').addClass('fail-validation');
+                status = false;
+            } else {
+                $('#num-REO-card').removeClass('fail-validation');
+            }
+
+            if (!checkIncomeBoxes()) {
+                $('.income-cards').addClass('fail-validation');
+                status = false;
+            } else {
+                $('.income-cards').removeClass('fail-validation');
+            }
+
+            if (!$('input[name="ausRadioOptions"]:checked').val()) {
+                $('#aus-card').addClass('fail-validation');
+                status = false;
+            } else {
+                $('#aus-card').removeClass('fail-validation');
+            }
+
+            //make sure this always stays last - displays note to user to correct errors in form
+            if (!status) {
+                $('#error-prompt-card').removeClass('d-none')
+            } else {
+                if (!$('#error-prompt-card').hasClass('d-none')) {
+                    $('#error-prompt-card').addClass('d-none')
+                }
+            }
+            return status;
+        }
+
+        // =============================================================================================
+        // == VALIDATION HELPERS =======================================================================
+        // =============================================================================================
+
+        // makes sure at least one income box is checked (unless 'streamline' is selected above)
+        function checkIncomeBoxes() {
+            let status = false;
+            if ($('input[id="loanPurposeRadio3"]:checked').val()) {
+                status = true;
+            }
+            let numBoxes = $('.income').length;
+            for (let i = 0; i < numBoxes; i++) {
+                if ($('.income')[i].checked) {
+                    status = true;
+                }
+            }
+            return status;
+        }
+
+        // =============================================================================================
+        // == SUBMISSION OBJECT BUILDER ================================================================
+        // =============================================================================================
+
+        function populateSubmissionObject() {
+            submission = {
+                loanNumber: $('#loan-number').val(),
+                transactionType: $('input:radio[name="transaction-radio"]:checked').val(),
+                program: $('#loan-program').val(),
+                loanPurpose: $('input:radio[name="loan-purpose-radio"]:checked').val(),
+                propType: $('input:radio[name="prop-type-radio"]:checked').val(),
+                occupancy: $('input:radio[name="occupancy-radio"]:checked').val(),
+                NOOprimary: $('input:radio[name="NOO-primary"]:checked').val(),
+                numMortgages: parseInt($('#num-mortgages').val().trim()),
+                anySubordination: $('input:radio[name="subordination-radio"]:checked').val() === 'subordinate',
+                areReporting: $('input:radio[name="reporting-radio"]:checked').val(),
+                otherREO: parseInt($('#num-REO').val().trim()),
+                anyInvestments: checkForInvestments(),
+                b1IncomeTypes: pullIncomeTypes('b1'),
+                b2IncomeTypes: pullIncomeTypes('b2'),
+                bk: {
+                    chapter: $('input:radio[name="bkRadioOptions"]:checked').val(),
+                    dischargeDate: $('#bk-date').val().trim()
+                },
+                derogs: pullDerogs(),
+                studentLoans: $('#studentLoanSwitch2')[0].checked,
+                studentLoansDeferred: $('input:radio[name="studentLoanRadioOptions"]:checked').val() === 'y',
+                ausFindings: $('input:radio[name="ausRadioOptions"]:checked').val()
+            }
+        }
+
+        // =============================================================================================
+        // == SUBMISSION OBJECT HELPERS ================================================================
+        // =============================================================================================
+
+        function checkForInvestments() {
+            let status = false;
+            let REOs = parseInt($('#num-REO').val().trim());
+            for (let i = 0; i < REOs; i++) {
+                if ($('input:radio[name="reoRadioOptions' + i + '"]:checked').val() === 'inv') {
+                    status = true;
+                }
+            }
+            return status;
+        }
+
+        function pullIncomeTypes(b) {
+            let incomeArr = [];
+            let numBoxes = $('.' + b + '-income').length;
+            for (let i = 0; i < numBoxes; i++) {
+                if ($('.' + b + '-income')[i].checked) {
+                    incomeArr.push($('.' + b + '-income')[i].value)
+                }
+            }
+            return incomeArr;
+        }
+
+        function pullDerogs() {
+            let derogArr = [];
+            let numBoxes = $('.derog').length;
+            for (let i = 0; i < numBoxes; i++) {
+                if ($('.derog')[i].checked) {
+                    derogArr.push($('.derog')[i].value)
+                }
+            }
+            return derogArr;
+        }
+
+        // =============================================================================================
+        // == Populate Submission List Items ===========================================================
+        // =============================================================================================
+
+        // initialize submission items arrays (different arrays for ordering)
+        let generalSubmissionItems = [];
+        let subjectPropertySubmissionItems = [];
+        let incomeSubmissionItems = [];
+        let reoSubmissionItems = [];
+        let bkSubmissionItems = [];
+        let derogSubmissionItems = [];
+        let studentLoanSubmissionItems = [];
+        let ausSubmissionItems = [];
+
+        function generateList() {
+            populateSubmissionObject();
+            console.log(submission);
+            generateGeneralItems(submission, generalSubmissionItems);
+            generateSubjectPropertyItems(submission, subjectPropertySubmissionItems);
+            generateIncomeSubmissionItems(submission, incomeSubmissionItems);
+            generateReoSubmissionItems(submission, reoSubmissionItems);
+            generateBkSubmissionItems(submission, bkSubmissionItems);
+            generateDerogSubmissionItems(submission, derogSubmissionItems);
+            generateStudentLoanSubmissionItems(submission, studentLoanSubmissionItems);
+            generateAUSSubmissionItems(submission, ausSubmissionItems);
+
+            combineSubmissionItems();
+        }
+
+        // =============================================================================================
+        // == Begin Businesss Logic ====================================================================
+        // =============================================================================================
+
+        function generateGeneralItems(sub, arr) {
+            if (sub.transactionType === 'refi') {
+                arr.push("__ Driver's License (if address is not correct, need LOX)");
+                arr.push("__ SS Card (not required for submission)");
+                arr.push("__ NTB Test");
+            }
+            if(sub.program === 'fha') {
+                arr.push("__ FHA Case Number Assignment")
+            }
+            if (sub.transactionType === 'purch') {
+                arr.push("__ Driver's License");
+                arr.push("__ SS Card (not required for submission)");
+                arr.push("__ Purchase Agreement");
+                arr.push("__ Earnest Money Deposit (copy of check, and source statement)")
+            }
+            if (sub.program === 'va' && sub.loanPurpose === 'streamline') {
+                arr.push("__ LIN")
+            }
+            if (sub.program === 'va' && sub.loanPurpose !== 'streamline') {
+                arr.push("__ Certificate of Eligibility (or DD-214 if COE not found)")
+            }
+            if (sub.program === 'va') {
+                arr.push("__ Req for COE (ink sign doc)")
+                arr.push("__ Verification of VA Benefits (ink sign doc)")
+                arr.push("__ Child Care Statement (ink sign doc)")
+            }
+            if (sub.occupancy !== 'owner' && sub.NOOprimary === 'rent') {
+                arr.push('__ Primary Residence: Current Lease')
+                arr.push('__ Primary Residence: Rent Payment History')
+            }
+            if (sub.occupancy !== 'owner' && sub.NOOprimary === 'own') {
+                arr.push('__ Primary Residence: Mortgage Statement (if applicable)')
+                arr.push('__ Primary Residence: Tax Bill and HOI (if not escrowed)')
+            }
+        }
+
+        function generateSubjectPropertyItems(sub,arr) {
+            arr.push("__ Homeowners Insurance Declarations Page");
+            arr.push("__ Wind & Hail / Flood Insurance (if applicable)");
+            if(sub.transactionType === 'refi' && sub.numMortgages === 1){
+                arr.push("__ Primary: Current Mortgage Statement")
+                if(sub.areReporting == "notReporting"){
+                    arr.push("__ Primary: Mortgage Payment History (or Credit Supplement)")
+                }
+            }
+            if(sub.transactionType === 'refi' && sub.numMortgages > 1) {
+                for(let i=0;i<sub.numMortgages;i++) {
+                    arr.push("__ Primary: Current Mortgage Statement #"+(i+1))
+                    if(sub.areReporting == "notReporting") {
+                        arr.push("__ Mortgage Payment History (or Credit Supplement) #"+(i+1)+" [if not reporting]");
+                    }
+                }
+            }
+            if(sub.anySubordination) {
+                arr.push("__ Copy of Note for Subordination (submit request thru Subordination Portal)");
+            }
+            if(sub.propType === 'pud'){
+                arr.push("__ HOA Contact Info (add into EPIC notes)")
+            }
+            if(sub.propType === 'condo'){
+                arr.push("__ Condo Association Contact Info (add into EPIC notes)")
+                arr.push("__ Condo Master Ins Policy")
+            }
+            if(sub.propType === 'manufactured') {
+                arr.push('__ Confirm Manufactured Home Meets Guides')
+            }
+            if(sub.areReporting === false && sub.program === 'fha') {
+                arr.push('__ Non-Reporting mortgage(s) force Manual Downgrade - Verify file meets Manual Underwriting Guidelines')
+            }
+        }
+
+        function generateIncomeSubmissionItems(sub,arr) {
+            if(!sub.b1IncomeTypes.length && !sub.b2IncomeTypes.length) {
+                arr.push("No Income Docs Required (confirm NCQ streamline)")
+            } else {
+                for(let i=0;i<sub.b1IncomeTypes.length;i++){
+                    if(sub.b1IncomeTypes[i] === 'commission' || sub.b1IncomeTypes[i] === 'schC' || sub.b1IncomeTypes[i] === 'k1'){
+                        arr.push('__ B1 Income: 1040 Tax Returns (2 years) with all Schedules')
+                    }
+                    if(sub.b1IncomeTypes[i] === 'commission') {
+                        arr.push('__ B1 Income: Breakdown of Commission vs Base for last 2 years (WVOE or Year-End Pay Stubs)')
+                    }
+                    if(sub.b1IncomeTypes[i] === 'k1') {
+                        arr.push('__ B1: Business Returns (2 years)')
+                    }
+                    if(sub.b1IncomeTypes[i] === 'w2' && sub.program !== 'conventional') {
+                        arr.push('__ B1 Income: W2s (2 years)')
+                        arr.push('__ B1 Income: Pay Stubs (covering 30 days w/ YTD income)')
+                    }
+                    if(sub.b1IncomeTypes[i] === 'w2' && sub.program === 'conventional') {
+                        arr.push('__ B1 Income: W2s (1 year unless otherwise specified by AUS)')
+                    }
+                    if(sub.b1IncomeTypes[i] === 'retirement' && sub.program !== 'conventional') {
+                        arr.push('__ B1 Income: 1099s (2 years)')
+                        arr.push('__ B1 Income: Pension Letter (Award Letter if SSI)')
+                        arr.push('__ B1 Income: Bank Statement (proof of deposit)')
+                    }
+                    if(sub.b1IncomeTypes[i] === 'retirement' && sub.program === 'conventional') {
+                        arr.push('__ B1 Income: 1099 (1 year unless otherwise specified by AUS)')
+                        arr.push('__ B1 Income: Pension Letter (Award Letter if SSI)')
+                        arr.push('__ B1 Income: Bank Statement (proof of deposit)')
+                    }
+                }
+                for(let i=0;i<sub.b2IncomeTypes.length;i++){
+                    if(sub.b2IncomeTypes[i] === 'commission' || sub.b2IncomeTypes[i] === 'schC' || sub.b2IncomeTypes[i] === 'k1'){
+                        arr.push('__ B2 Income: 1040 Tax Returns (2 years) with all Schedules')
+                    }
+                    if(sub.b2IncomeTypes[i] === 'commission') {
+                        arr.push('__ B2 Income: Breakdown of Commission vs Base for last 2 years (WVOE or Year-End Pay Stubs)')
+                    }
+                    if(sub.b2IncomeTypes[i] === 'k1') {
+                        arr.push('__ B2 Income: Business Returns (2 years)')
+                    }
+                    if(sub.b2IncomeTypes[i] === 'w2' && sub.program !== 'conventional') {
+                        arr.push('__ B2 Income: W2s (2 years)')
+                        arr.push('__ B2 Income: Pay Stubs (covering 30 days w/ YTD income)')
+                    }
+                    if(sub.b2IncomeTypes[i] === 'w2' && sub.program === 'conventional') {
+                        arr.push('__ B2 Income: W2s (1 year unless otherwise specified by AUS)')
+                    }
+                    if(sub.b2IncomeTypes[i] === 'retirement' && sub.program !== 'conventional') {
+                        arr.push('__ B2 Income: 1099s (2 years)')
+                        arr.push('__ B2 Income: Pension Letter (Award Letter if SSI)')
+                        arr.push('__ B2 Income: Bank Statement (proof of deposit)')
+                    }
+                    if(sub.b2IncomeTypes[i] === 'retirement' && sub.program === 'conventional') {
+                        arr.push('__ B2 Income: 1099 (1 year unless otherwise specified by AUS)')
+                        arr.push('__ B2 Income: Pension Letter (Award Letter if SSI)')
+                        arr.push('__ B2 Income: Bank Statement (proof of deposit)')
+                    }
+                }
+            }
+            
+        }
+
+        function generateReoSubmissionItems(sub,arr) {
+            if(!sub.otherREO) {
+                return;
+            }
+            for(let i=0;i<sub.otherREO;i++) {
+                arr.push('__ REO #'+(i+1)+': Mortgage Statement (and/or Tax Bill and HOI if not escrowed)');
+            }
+            if(sub.anyInvestments) {
+                arr.push('__ Investment Properties: Current Lease(s), 2 years 1040s with Schedule E')
+            }
+        }
+
+        function generateBkSubmissionItems(sub,arr) {
+            if(!sub.bk.chaper) {
+                return;
+            }
+            if(sub.bk.chaper === '13' && sub.program === 'conventional') {
+                arr.push('__ BK Seasoning: 2 years for discharge; 4 years for dismiss');
+            }
+            if(sub.bk.chapter === '13' && (sub.program === 'fha' || sub.program === 'va')) {
+                arr.push('__ BK: Must have been entered 12 months preceding application date and discharged prior to closing')
+            }
+            if(sub.bk.chapter && sub.program === 'smart') {
+                arr.push("__ BK Seasoning: 4 years for 'Smart'; 2 years for 'SmartPlus'; 1 year for 'SmartTrac'")
+                arr.push('__ Detailed LOX for BK')
+            }
+            if(sub.bk.chapter === '7' && sub.program === 'conventional') {
+                arr.push('__ BK Seasoning: 4 years from discharge or dismiss')
+            }
+            if(sub.bk.chapter === '7' && (sub.program === 'fha' || sub.program === 'va')) {
+                arr.push('__ BK Seasoning: Discharge 24 months prior to APPLICATION date')
+            }
+        }
+
+        function generateDerogSubmissionItems(sub,arr) {
+            for(let i=0;i<sub.derogs.length;i++) {
+                let derog = sub.derogs[i];
+                if (derog === 'foreclosure' && sub.program === 'conventional') {
+                    arr.push('__ Verify Foreclosure seasoned 7 years')
+                }
+                if (derog === 'foreclosure' && sub.program === 'fha') {
+                    arr.push('__ Verify Foreclosure seasoned 36 months from application date')
+                }
+                if((derog === 'foreclosure' || derog === 'dil') && sub.program === 'va') {
+                    arr.push('__ Verify Foreclosure/Deed in Lieu seasoned 24 months from application date')
+                }
+                if(derog === 'foreclosure' && sub.program === 'smart') {
+                    arr.push("__ Foreclosure Seasoning: 4 year for 'Smart'; 2 years for 'SmartPlus'; 2 years for 'SmartTrac")
+                    arr.push('__ Detailed LOX for Foreclosure')
+                }
+                if((derog === 'dil' || derog === 'shortSale') && sub.program === 'conventional') {
+                    arr.push('__ D-I-L Seasoning/Shot Sale: 2 years @ 80% LTV; 4 year @ 90% LTV; 7 years @ matrix LTV')
+                }
+                if(derog === 'dil' && sub.program === 'fha') {
+                    arr.push('__ Verify Deed in Lieu settled 36 months preceding application date')
+                }
+                if((derog === 'dil' || derog === 'shortSale') && sub.program === 'smart') {
+                    arr.push("__ D-I-L/Short Sales Seasoning: 4 year for 'Smart'; 2 years for 'SmartPlus'; 1 year for 'SmartTrac'")
+                    arr.push('__ Detailed LOX for Short Sales / Deed in Lieu')
+                }
+                if(derog === 'shortSale' && (sub.program === 'va' || sub.program === 'fha')) {
+                    arr.push('__ LOX for Short Sale')
+                }
+                if(derog === 'disputes' && sub.program === 'fha') {
+                    arr.push('__ Disputes force Manual Downgrade - Verify file meets Manual Underwriting Guidelines')
+                }
+                if(derog === 'collections' && sub.program === 'fha') {
+                    arr.push('__ Must use 5% of collection balance as qualifying monthly payment')
+                }
+                if((derog === 'collections' || derog === 'disputes') && sub.program === 'conventional') {
+                    arr.push('__ Collection/Disputes: Review AUS findings to determine if these need to be removes/paid')
+                }
+            }
+        }
+
+        function generateStudentLoanSubmissionItems(sub,arr) {
+            if(!sub.studentLoans) {
+                return;
+            } else {
+                switch (sub.program) {
+                    case 'conventional':
+                        arr.push('__ Student Loans: LPA Scored Loans: use monthly payment amount on credit if > $0; if not, use 0.5% of balance');
+                        arr.push('__ Student Loans: DU Scored Loans: use monthly payment amount on credit if > $0; if not, use 1% of balance');
+                        break;
+                    case 'fha': 
+                        arr.push('__ Student Loans: Use the GREATER of (1) the amount reported on credit or (2) 1% of the balance');
+                        break;
+                    case 'va': 
+                        if(sub.studentLoansDeferred){
+                            arr.push('__ Student Loans: do not include a payment')
+                        } else {
+                            arr.push('__ Student Loans: use the GREATER of (1) the amount reported on credit or (2) ([Loan Balance] * 5%) / 12')
+                        }
+                        break;
+                    case 'smart': 
+                        arr.push('__ Student Loans: use monthly payment amount on credit if > $0; if not, use 1% of balance')
+                        break;
+                }
+            }
+        }
+
+        function generateAUSSubmissionItems(sub,arr) {
+            if(sub.ausFindings !== 'refer'){
+                return;
+            }
+            arr.push('__ LOX for all delinquency on credit')
+            arr.push('__ Minimum 1 month PITIA reserves')
+            if(sub.program === 'fha'){
+                arr.push('__ Refer findings force Manual Downgrade - Verify file meets Manual Underwriting Guidelines')
+            }
+        }
+
+        // =============================================================================================
+        // == End Business Logic =======================================================================
+        // =============================================================================================
+
+
+
+        // =============================================================================================
+        // == SUBMISSION FORM BUILDER - Display on Page ================================================
+        // =============================================================================================
+
+        // combine/order submission items into one array => will iterate over this to build submission list display
+        function combineSubmissionItems() {
+            let totalSubmissionList = generalSubmissionItems.concat(subjectPropertySubmissionItems,incomeSubmissionItems,reoSubmissionItems,bkSubmissionItems,derogSubmissionItems,studentLoanSubmissionItems,ausSubmissionItems);
+
+            generalSubmissionItems = [];
+            subjectPropertySubmissionItems = [];
+            incomeSubmissionItems = [];
+            reoSubmissionItems = [];
+            bkSubmissionItems = [];
+            derogSubmissionItems = [];
+            studentLoanSubmissionItems = [];
+            ausSubmissionItems = [];
+
+            buildSubmissionListDisplay(totalSubmissionList);
+        }
+
+        // build the card that the user sees
+        function buildSubmissionListDisplay(arr) {
+            $('#list-display').empty();
+            let card = $('<div class="card col-lg-12">')
+            let cardBody = $('<div class="card-body">')
+            let cardTitle = $('<h3 class="card-title">'+submission.loanNumber+': Submission Checklist</h3>')
+
+            cardBody.append(cardTitle);
+
+            let cardList = $('<ul id="sub-list">')
+
+            for(let i=0;i<arr.length;i++) {
+                let item = $('<li>'+arr[i]+'</li>');
+                cardList.append(item);
+            }
+
+            cardBody.append(cardList);
+
+            card.append(cardBody);
+
+            $(cardBody).append($('<button type="button" id="pdf-button" class="btn btn-outline-danger text-left">Save/Print</button>'))
+
+            if(submission.program === 'fha') {
+                $(cardBody).append($('<button type="button" id="case-num" class="btn btn-outline-warning ml-4">Send FHA Case # Request</button>'))
+            }
+            if(submission.program === 'va' && submission.loanPurpose !== 'streamline') {
+                $(cardBody).append($('<button type="button" id="coe-req" class="btn btn-outline-warning ml-4">Send COE Request</button>'))
+            }
+            if(submission.program === 'va' && submission.loanPurpose === 'streamline') {
+                $(cardBody).append($('<button type="button" id="lin-req" class="btn btn-outline-warning ml-4">Send LIN Request</button>'))
+            }
+
+            $('#list-display').append(card);
+        }
+
+        // =============================================================================================
+        // == SUBMISSION FORM BUTTONS ==================================================================
+        // =============================================================================================
+
+        // converts list into savable pdf
+        $(document).on('click', '#pdf-button', function() {
+            let doc = new jsPDF();
+            doc.text('Submission Form - '+submission.loanNumber,20,10)
+            doc.fromHTML($('#sub-list').html(),20,15);
+            doc.save(submission.loanNumber+ '-submission.pdf');
+        })
+
+        // == Email Buttons =========================
+
+        // FHA Case Number Request
+        $(document).on('click', '#case-num', function() {
+            let FHAcaseForm = 'FHA CASE # ORDER %0D%0A%0D%0ABorrower Name: %0D%0ASSN #: %0D%0ADOB: %0D%0AAddress 1: %0D%0AAddress 2: %0D%0ACity, State, Zip: %0D%0ACo-Borrower Name: %0D%0ACo-Borrower SSN: %0D%0ACo-Borrower DOB: %0D%0ATransaction Type (refi or purchase): '+submission.transactionType+'%0D%0AIs Prior FHA Loan (y/n): %0D%0AIf Prior FHA, prior case #: %0D%0AProperty Type: '+submission.propType+'%0D%0ANew Mortgage Term (years): %0D%0AFixed or ARM: %0D%0AStreamline (y/n): '+isStreamline()+'%0D%0AIf Streamline, W/ or W/O Appraisal?: %0D%0ACash Out (y/n): '+isCashOut()+'%0D%0AYour NMLS#: %0D%0A%0D%0A**VERIFY LOANS # IN SUBJECT IS CORRECT**'
+            
+            newWindow = window.open('mailto:'+opsEmail+'?subject=FHA%20Case%20#%20Req%20-%20'+submission.loanNumber+'&body='+FHAcaseForm);
+
+            setTimeout(function() {newWindow.close();}, 0);
+        })
+
+        // COE Request
+        $(document).on('click', '#coe-req', function() {
+            let coeReq = 'COE Request %0D%0A%0D%0AVeteran Name:  %0D%0ASSN:  %0D%0ADOB:  %0D%0AAny Prior VA Loans (y/n)?:  %0D%0AIf Yes, Address:  %0D%0AApply for Restoration (y/n)?:  %0D%0A%0D%0A**VERIFY LOANS # IN SUBJECT IS CORRECT**'
+
+            newWindow = window.open('mailto:'+opsEmail+'?subject=COE%20Request%20-%20'+submission.loanNumber+'&body='+coeReq);
+
+            setTimeout(function() {newWindow.close();}, 0);
+        })
+
+        // LIN Request
+        $(document).on('click', '#lin-req', function() {
+            let linReq = 'LIN Request %0D%0A%0D%0AVeteran Name:  %0D%0ASSN:  %0D%0ADOB:  %0D%0A%0D%0A**VERIFY LOANS # IN SUBJECT IS CORRECT**'
+
+            newWindow = window.open('mailto:'+opsEmail+'?subject=LIN%20Request%20-%20'+submission.loanNumber+'&body='+linReq);
+
+            setTimeout(function() {newWindow.close();}, 0);
+        })
+
+        // =============================================================================================
+        // == SUBMISSION FORM BUTTON - Helpers (for some autofill to the forms) ========================
+        // =============================================================================================
+
+        function isCashOut(){
+            if(submission.loanPurpose === 'cashout') {
+                return 'y';
+            }else{
+                return 'n'
+            }
+        }
+
+        function isStreamline(){
+            if(submission.loanPurpose === 'streamline'){
+                return 'y';
+            } else {
+                return 'n';
+            }
+        }
+
+        
+
+    </script>
+</body>
+
+</html>
+
