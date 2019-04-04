@@ -775,6 +775,7 @@
                     }
                     if(sub.b1IncomeTypes[i] === 'w2' && sub.program === 'conventional') {
                         arr.push('__ B1 Income: W2s (1 year unless otherwise specified by AUS)')
+                        arr.push('__ B1 Income: Pay Stubs (covering 30 days w/ YTD income)')
                     }
                     if(sub.b1IncomeTypes[i] === 'retirement' && sub.program !== 'conventional') {
                         arr.push('__ B1 Income: 1099s (2 years)')
@@ -803,6 +804,7 @@
                     }
                     if(sub.b2IncomeTypes[i] === 'w2' && sub.program === 'conventional') {
                         arr.push('__ B2 Income: W2s (1 year unless otherwise specified by AUS)')
+                        arr.push('__ B2 Income: Pay Stubs (covering 30 days w/ YTD income)')
                     }
                     if(sub.b2IncomeTypes[i] === 'retirement' && sub.program !== 'conventional') {
                         arr.push('__ B2 Income: 1099s (2 years)')
