@@ -16,3 +16,5 @@ Technologies used:
   * jQuery
   * jsPDF
   * Bootstrap
+  
+![screenshot](./screenshot.png "Mortgage Documentation")
